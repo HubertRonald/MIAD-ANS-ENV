@@ -24,6 +24,21 @@ git clone https://github.com/HubertRonald/MIAD-ANS-ENV.git
 
 5.- Una vez levantada la instancia ejecuta el notebook `app.ipynb` para probar que carga las dependencias
 
+# Kernel: Notebook
+
+Este está en la siguiente ruta cuando lo selecciones en el notebook
+```bash
+$ which python
+/usr/local/bin/python
+```
+
+La versionde python a escoger es:
+
+```bash
+$ python --version
+Python 3.7.17
+```
+
 # .gitignore
 
 Fue generado en [gitignore.io](https://www.toptal.com/developers/gitignore/) con los filtros `python`, `macos`, `windows` y consumido mediante su API como archivo crudo desde la terminal:
