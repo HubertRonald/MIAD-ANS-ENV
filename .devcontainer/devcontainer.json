@@ -1,0 +1,43 @@
+{
+    "name": "PythonANSJupyter",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": "."
+    },
+    "runArgs": ["--name", "${localEnv:USER}_ans_devcontainer"],
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/${localEnv:USER}/code,type=bind",
+    "workspaceFolder": "/home/${localEnv:USER}/code",
+    "mounts": [
+        "source=${localEnv:HOME}/.gitconfig,target=/home/${localEnv:USER}/.gitconfig,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.config/gh,target=/home/${localEnv:USER}/.config/gh,type=bind,consistency=cached"
+    ],
+    
+    "features": {
+      "ghcr.io/devcontainers/features/git:1": {},
+      "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+
+    "customizations": {
+      "vscode": {
+        "settings": {
+          "python.defaultInterpreterPath": "/usr/local/bin/python",
+          "python.linting.enabled": true,
+          "python.linting.pylintEnabled": true,
+          "python.formatting.provider": "black"
+        },
+        "extensions": [
+          "ms-python.python",
+          "ms-toolsai.jupyter",
+          "ms-toolsai.datawrangler",
+          "kilocode.Kilo-Code",
+          "jithurjacob.nbpreviewer"
+        ]
+      }
+    },
+    "forwardPorts": [8888],
+    "portsAttributes": {
+      "8888": { "label": "Jupyter Notebook", "onAutoForward": "openBrowser" }
+    },
+
+    "postCreateCommand": "python -m ipykernel install --user --name python3 --display-name 'Python 3 && pip install --upgrade pyrosm geopandas pygeos'"
+  }
