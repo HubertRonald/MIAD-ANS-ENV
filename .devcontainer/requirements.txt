@@ -69,3 +69,4 @@ ConTexto==0.1.0
 panel
 bokeh
 pamela
+xlrd
