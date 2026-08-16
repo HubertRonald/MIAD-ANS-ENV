@@ -1,0 +1,10 @@
+# 2026 reproducibility constraints for the historical Python 3.7 runtime.
+#
+# Keep these separate from requirements.txt so the original dependency
+# declarations remain visible. These pins avoid post-historical releases
+# that no longer provide compatible Python 3.7 binary distributions.
+#
+# Compatible with the dependency ranges required by spaCy 2.3.2.
+murmurhash==1.0.10
+cymem==2.0.8
+preshed==3.0.7

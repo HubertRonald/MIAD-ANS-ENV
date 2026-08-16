@@ -41,12 +41,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Actualizar pip
 RUN pip install --no-cache-dir --upgrade pip
 
-# Copiar el archivo de requerimientos
+# Copiar requerimientos históricos y constraints de compatibilidad Python 3.7
 COPY requirements.txt /tmp/requirements.txt
+COPY constraints-py37.txt /tmp/constraints-py37.txt
 
-# Instalar todos los paquetes de Python desde el archivo de requerimientos
-RUN pip install --no-cache-dir -r /tmp/requirements.txt \
-    && rm /tmp/requirements.txt
+# Instalar los paquetes preservando los requerimientos históricos y
+# limitando únicamente incompatibilidades transitivas verificadas.
+RUN pip install --no-cache-dir \
+        -c /tmp/constraints-py37.txt \
+        -r /tmp/requirements.txt \
+    && rm /tmp/requirements.txt /tmp/constraints-py37.txt
 
 # Descargar el modelo de Spacy
 RUN python -m spacy download es_core_news_sm
@@ -54,4 +58,4 @@ RUN python -m spacy download es_core_news_sm
 # Exponer el puerto para Jupyter
 EXPOSE 8888
 
-# El usuario final y el directorio de trabajo son manejados por devcontainer.json
+# El workspace y el ciclo de vida del contenedor son gestionados por VS Code Dev Containers.
